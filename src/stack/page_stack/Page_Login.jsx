@@ -3,7 +3,9 @@ import React from 'react'
 
 import Style_Login from '../../styles/Style_Login'
 
-const Page_Login = () => {
+const Page_Login = (props) => {
+  const {navigation} = props;
+
   return (
     <View style={Style_Login.container}>
       <Image
@@ -28,7 +30,9 @@ const Page_Login = () => {
         </TouchableOpacity>
 
         <Text style={Style_Login.text_caption}>Bạn mới sử dụng GShop?</Text>
-        <TouchableOpacity style={Style_Login.btn_signUp}>
+        <TouchableOpacity
+          style={Style_Login.btn_signUp}
+          onPress={() => navigation.navigate('SignUp')}>
           <Text style={Style_Login.text_btn}>Đăng ký</Text>
         </TouchableOpacity>
       </View>
