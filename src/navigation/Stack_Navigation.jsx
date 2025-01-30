@@ -13,7 +13,7 @@ const Stack_Navigation = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Trạng thái đăng nhập
 
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='Login'>
+    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='Splash'>
       {/* Các màn hình chung */}
       <Stack.Screen name='Splash' component={Page_Splash} />
       <Stack.Screen name='Tab' component={Tab_Navigation} />

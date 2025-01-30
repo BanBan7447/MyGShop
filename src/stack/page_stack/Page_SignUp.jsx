@@ -37,7 +37,7 @@ const Page_SignUp = (props) => {
 
       if (response) {
         ToastAndroid.show('Đăng ký thành công', ToastAndroid.LONG);
-      }else {
+      } else {
         Alert.alert('Đăng ký thất bại', 'Email hoặc SĐT đã tồn tại')
       }
 

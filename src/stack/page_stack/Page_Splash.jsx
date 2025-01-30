@@ -11,7 +11,7 @@ const Page_Splash = (props) => {
   useEffect(() => {
     setTimeout(() => {
       navigation.navigate('Tab');
-    }, 1979)
+    }, 979)
   })
 
   return (
