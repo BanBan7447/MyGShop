@@ -56,38 +56,38 @@ const getCategories = async () => {
         const response = await AxiosInstance().get('/category/getCategory');
 
         if(response.status == true){
+            console.log('Data Categories', response);
             return response.data;
-        }
+        };
+
+        
     }catch(e){
         console.log(e)
     }
 };
 
-// Gọi API lấy danh sách sản phẩm
-const getProducts = async () => {
-    try {
-        const response = await AxiosInstance().get('/product/getAllProducts');
-        
-        if(response.status == true) {
-            return response;
-        }
-    } catch(e) {
-        console.log(e);
-    }
-};
-
 // Gọi API lấy danh sách sản phẩm theo loại
 const getProductsByCategory = async (categoryID) => {
+    console.log("Calling API with categoryID:", categoryID);
     try {
-        const response = await AxiosInstance().get(`/getProductsByCategory?categoryID=${categoryID}`);
+        console.log('>>>>>>>>>>>>>>>>>> get Products by Categories')
+
+        console.log("CategoryID before API call:", categoryID);
+        console.log(`Calling API: ${AxiosInstance().defaults.baseURL}/getProductsByCategory?categoryID=${categoryID}`);
+
+        const response = await AxiosInstance().get(`/product/getProductsByCategory?categoryID=${categoryID}`);
+        console.log('API Response:', response.data);
+
         if(response.status == true) {
-            return response.data.data;
+            return response.data;
         }
+
+        console.log('Data Products', response);
     } catch(e) {
-        console.log(e);
+        console.log('Lỗi', e.message);
     }
 
     return [];
 }
 
-export { login, signUp, getCategories, getProducts, getProductsByCategory }
+export { login, signUp, getCategories, getProductsByCategory }

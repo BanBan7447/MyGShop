@@ -5,13 +5,14 @@ import Style_Login from '../../styles/Style_Login'
 
 import { login } from '../../helper/ApiHelper'
 import { AppContext } from '../../context'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Page_Login = (props) => {
   const { navigation } = props;
   const { users, setUsers } = useContext(AppContext);
 
   const [email_phone, setEmail_Phone] = useState("tranbichngoc@gmail.com");
-  const [password, setPassword] = useState("Ngoc123");
+  const [password, setPassword] = useState("Ngoc1234");
 
   // Hàm đăng nhập
   const onLogin = async () => {
@@ -21,24 +22,29 @@ const Page_Login = (props) => {
       return;
     }
 
-      try {
-        const body = {
-          email: email_phone.includes('@') ? email_phone : null, // Trả về email nếu có @ và ngược lại
-          phone: email_phone.includes('@') ? null : email_phone,
-          password: password,
-        }
-
-        const response = await login(body);
-
-        if (response) {
-          setUsers(response); // Lưu thông tin người dùng vào user context
-          ToastAndroid.show('Đăng nhập thành công', ToastAndroid.LONG);
-          return;
-        }
-
-      } catch (e) {
-        Alert.alert('Sai thông tin', 'Email/SĐT hoặc Mật khẩu không đúng')
+    try {
+      const body = {
+        email: email_phone.includes('@') ? email_phone : null, // Trả về email nếu có @ và ngược lại
+        phone: email_phone.includes('@') ? null : email_phone,
+        password: password,
       }
+
+      const response = await login(body);
+
+      if (response) {
+        setUsers(response); // Lưu thông tin người dùng vào user context
+
+        // Lưu thông tin người dùng vào AsyncStorage.
+        await AsyncStorage.setItem('userInfo', JSON.stringify(response));
+
+        ToastAndroid.show('Đăng nhập thành công', ToastAndroid.LONG);
+        navigation.navigate('Tab', {screen: 'Profile'});
+        return;
+      }
+
+    } catch (e) {
+      Alert.alert('Sai thông tin', 'Email/SĐT hoặc Mật khẩu không đúng')
+    }
   }
 
   return (
