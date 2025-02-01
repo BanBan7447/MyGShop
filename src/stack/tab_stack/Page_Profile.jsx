@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Button } from 'react-native'
+import { View, Text, TouchableOpacity, Button, Image } from 'react-native'
 import React, { useContext } from 'react'
 import { AppContext } from '../../context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -20,6 +20,9 @@ const Page_Profile = (props) => {
 
       {users ? (
         <View>
+          <Image
+            source={{uri: users.avatar}}
+            style={{width: 100, height: 100}}/>
           <Text>{users.name}</Text>
           <Text>{users.email}</Text>
           <Text>{users.phone}</Text>

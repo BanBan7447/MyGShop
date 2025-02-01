@@ -60,11 +60,25 @@ const getCategories = async () => {
             return response.data;
         };
 
-        
     }catch(e){
         console.log(e)
     }
 };
+
+// Gọi API lấy tất cả sản phẩm
+const getAllProdcts = async() => {
+    try{
+        console.log(">>>>>>>>>>>> getAllProducts");
+        const response = await AxiosInstance().get('/product/getAllProducts');
+
+        if(response.status == true){
+            console.log('Data Products', response);
+            return response.data;
+        };
+    }catch(e){
+        console.log(e)
+    }
+}
 
 // Gọi API lấy danh sách sản phẩm theo loại
 const getProductsByCategory = async (categoryID) => {
@@ -90,4 +104,9 @@ const getProductsByCategory = async (categoryID) => {
     return [];
 }
 
-export { login, signUp, getCategories, getProductsByCategory }
+export {
+    login,
+    signUp,
+    getCategories,
+    getAllProdcts,
+    getProductsByCategory }
