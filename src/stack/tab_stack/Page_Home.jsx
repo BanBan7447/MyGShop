@@ -1,9 +1,15 @@
-import { View, Text, TouchableOpacity, FlatList, Image, ActivityIndicator, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, FlatList, Image, ActivityIndicator, ScrollView, LogBox } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getCategories, getProductsByCategory, getAllProdcts } from '../../helper/ApiHelper';
 import FastImage from 'react-native-fast-image';
 import Style_Home from '../../styles/Style_Home';
 import colors from '../../styles/colors';
+import DropDownPicker from 'react-native-dropdown-picker';
+
+// Tắt cảnh báo cụ thể
+LogBox.ignoreLogs([
+  'VirtualizedLists should never be nested inside plain ScrollViews with the same orientation', // Cảnh báo cụ thể bạn muốn tắt
+]);
 
 const Page_Home = (props) => {
   const { navigation } = props;
@@ -13,6 +19,14 @@ const Page_Home = (props) => {
   const [selectCategory, setSelectCategory] = useState(null);
 
   const [loading, setLoading] = useState(true);
+
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("highlight");
+  const [items, setItems] = useState([
+    { label: 'Nổi bật', value: 'highlight' },
+    { label: 'Giá cao nhất', value: 'high_price' },
+    { label: 'Giá thấp nhất', value: 'low_price' },
+  ]);
 
   // Hàm lấy danh mục
   const funGetCategories = async () => {
@@ -43,6 +57,21 @@ const Page_Home = (props) => {
     funGetAllProducts()
     funGetCategories();
   }, []);
+
+  // Hàm lọc sản phẩm theo giá
+  const filterProducts = (filter) => {
+    let sortedProducts;
+    if (filter === 'high_price') {
+      sortedProducts = [...products].sort((a, b) => b.price - a.price);
+    } else if (filter === 'low_price') {
+      sortedProducts = [...products].sort((a, b) => a.price - b.price);
+    } else if (filter === 'highlight') {
+      sortedProducts = [...products].sort(() => Math.random() - 0.5);
+    } else {
+      sortedProducts = [...products];
+    }
+    setProducts(sortedProducts);
+  }
 
   // Hàm render danh sách category
   const renderCategory = ({ item }) => {
@@ -148,7 +177,8 @@ const Page_Home = (props) => {
           source={require('../../assets/image/logo_app_2.png')}
           style={Style_Home.img_logo} />
 
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Search')}>
           <Image
             source={require('../../assets/icon/icon_search.png')}
             style={Style_Home.img_icon} />
@@ -178,6 +208,77 @@ const Page_Home = (props) => {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={Style_Home.container_category}
       />
+
+      <View style={Style_Home.container_filer}>
+        <Text style={Style_Home.title}>Đề xuất cho bạn</Text>
+
+        <DropDownPicker
+          open={open}
+          value={value}
+          items={items}
+          setOpen={setOpen}
+          setValue={setValue}
+          setItems={setItems}
+          containerStyle={{
+            width: 160,
+            height: 40,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+          
+          style={{
+            borderWidth: 0,
+          }}
+
+          textStyle={{
+            fontSize: 16,
+            color: colors.Black,
+            marginRight: 10,
+            textAlign: 'left'
+          }}
+
+          labelStyle={{
+            textAlign: 'right'
+          }}
+
+          dropDownContainerStyle={{
+            backgroundColor: colors.White, // Màu nền của dropdown
+            borderTopStartRadius: 12,
+            borderTopEndRadius: 12,
+            borderBottomStartRadius: 12,
+            borderBottomStartRadius: 12,
+            borderWidth: 1,
+            borderColor: colors.Light_Grey,
+            width: '100%'
+          }}
+
+          onChangeValue={(value) => {
+            filterProducts(value)
+          }}
+
+          showArrowIcon={true}
+          ArrowDownIconComponent={() => {
+            return (
+              <Image
+                style={{ width: 12, height: 12 }}
+                source={require('../../assets/icon/icon_arrow_down.png')} />
+            )
+          }}
+
+          ArrowUpIconComponent={() => {
+            return (
+              <Image
+                style={{ width: 12, height: 12, transform: [{ rotate: '180deg' }] }}
+                source={require('../../assets/icon/icon_arrow_down.png')} />
+            )
+          }}
+
+          scrollViewProps={{
+            nestedScrollEnabled: false,
+            keyboardShouldPersistTaps: 'handled'
+          }}
+        />
+      </View>
 
       <FlatList
         data={products}

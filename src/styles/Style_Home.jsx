@@ -1,5 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import { StyleSheet } from 'react-native'
 import colors from './colors'
 
 const Style_Home = StyleSheet.create({
@@ -25,6 +24,22 @@ const Style_Home = StyleSheet.create({
     img_icon: {
         width: 24,
         height: 24
+    },
+
+    container_filer: {
+        flexDirection: 'row',
+        paddingHorizontal: 20,
+        marginBottom: 24,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
+        height: 40,
+    },
+
+    title: {
+        fontFamily: 'Inter Medium',
+        fontSize: 20,
+        color: colors.Black
     },
 
     container_category: {

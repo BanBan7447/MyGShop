@@ -13,6 +13,7 @@ const Page_Login = (props) => {
 
   const [email_phone, setEmail_Phone] = useState("tranbichngoc@gmail.com");
   const [password, setPassword] = useState("Ngoc1234");
+  const [hidePassword, setHidePassword] = useState("false");
 
   // Hàm đăng nhập
   const onLogin = async () => {
@@ -38,7 +39,7 @@ const Page_Login = (props) => {
         await AsyncStorage.setItem('userInfo', JSON.stringify(response));
 
         ToastAndroid.show('Đăng nhập thành công', ToastAndroid.LONG);
-        navigation.navigate('Tab', {screen: 'Profile'});
+        navigation.navigate('Tab', { screen: 'Profile' });
         return;
       }
 
@@ -63,10 +64,23 @@ const Page_Login = (props) => {
           onChangeText={text => setEmail_Phone(text)} />
 
         <Text style={Style_Login.title_input}>Mật khẩu</Text>
-        <TextInput
-          style={Style_Login.text_input}
-          value={password}
-          onChangeText={text => setPassword(text)} />
+        <View style={Style_Login.container_Password}>
+          <TextInput
+            style={Style_Login.text_input}
+            value={password}
+            secureTextEntry={!hidePassword}
+            onChangeText={text => setPassword(text)} />
+
+          <TouchableOpacity
+            onPress={() => setHidePassword(!hidePassword)}
+            style={Style_Login.eye_icon}>
+            <Image
+              source={hidePassword
+                ? require('../../assets/icon/icon_show.png')
+                : require('../../assets/icon/icon_hide.png')}
+                style={Style_Login.img_icon} />
+          </TouchableOpacity>
+        </View>
 
         <Text style={Style_Login.text_forgot}>Quên mật khẩu?</Text>
 

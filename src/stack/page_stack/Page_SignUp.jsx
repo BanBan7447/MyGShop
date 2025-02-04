@@ -16,6 +16,8 @@ const Page_SignUp = (props) => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
 
+  const [hidePassword, setHidePassword] = useState(false);
+
   // Hàm đăng ký
   const onSignUp = async () => {
     try {
@@ -77,10 +79,23 @@ const Page_SignUp = (props) => {
             onChangeText={text => setEmail(text)} />
 
           <Text style={Style_SignUp.title_input}>Mật khẩu</Text>
-          <TextInput
-            style={Style_SignUp.text_input}
-            value={password}
-            onChangeText={text => setPassword(text)} />
+          <View style={Style_SignUp.container_Password}>
+            <TextInput
+              style={Style_SignUp.text_input}
+              value={password}
+              secureTextEntry={!hidePassword}
+              onChangeText={text => setPassword(text)} />
+
+            <TouchableOpacity
+              onPress={() => setHidePassword(!hidePassword)}
+              style={Style_SignUp.eye_icon}>
+              <Image
+                source={hidePassword
+                  ? require('../../assets/icon/icon_show.png')
+                  : require('../../assets/icon/icon_hide.png')}
+                style={Style_SignUp.img_icon} />
+            </TouchableOpacity>
+          </View>
 
           <TouchableOpacity
             style={[Style_SignUp.btn_signUp, { marginTop: 8 }]}

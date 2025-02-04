@@ -13,6 +13,23 @@ const Style_Login = StyleSheet.create({
     height: 40,
   },
 
+  container_Password: {
+    flexDirection: 'row',
+    alignItems: "center",
+  },
+
+  img_icon: {
+    width: 24,
+    height: 24,
+    tintColor: colors.Black
+  },
+
+  eye_icon: {
+    position: 'absolute',
+    right: 20,
+    top: '22%',
+  },
+
   container_form: {
     flex: 1,
     justifyContent: 'center'
@@ -39,7 +56,8 @@ const Style_Login = StyleSheet.create({
     backgroundColor: colors.Light_Blue,
     borderRadius: 16,
     marginBottom: 24,
-    paddingLeft: 20
+    paddingLeft: 20,
+    fontSize: 16
   },
 
   text_forgot: {

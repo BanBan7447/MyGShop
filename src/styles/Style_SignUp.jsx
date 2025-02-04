@@ -27,6 +27,23 @@ const Style_SignUp = StyleSheet.create({
         marginTop: 24,
         marginBottom: 24
       },
+
+      container_Password: {
+        flexDirection: 'row',
+        alignItems: "center",
+      },
+    
+      img_icon: {
+        width: 24,
+        height: 24,
+        tintColor: colors.Black
+      },
+    
+      eye_icon: {
+        position: 'absolute',
+        right: 20,
+        top: '22%',
+      },
     
       title_input: {
         fontFamily: 'Inter Medium',
@@ -41,7 +58,8 @@ const Style_SignUp = StyleSheet.create({
         backgroundColor: colors.Light_Blue,
         borderRadius: 16,
         marginBottom: 24,
-        paddingLeft: 20
+        paddingLeft: 20,
+        fontSize: 16
       },
     
       text_forgot: {
