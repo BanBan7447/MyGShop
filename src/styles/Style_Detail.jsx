@@ -4,7 +4,7 @@ import colors from './colors'
 const Style_Detail = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.White
+        backgroundColor: colors.White,
     },
 
     navigation: {
@@ -12,6 +12,30 @@ const Style_Detail = StyleSheet.create({
         alignItems: 'center',
         height: 56,
         marginTop: 8
+    },
+
+    card: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: colors.Green,
+        paddingHorizontal: 16,
+        paddingVertical: 12,
+        marginHorizontal: 20,
+        borderRadius: 12,
+    },
+
+    text_card: {
+        fontFamily: 'Inter Bold',
+        color: 'white',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontFamily: 'Inter Bold',
+        fontSize: 18,
     },
 
     cart: {

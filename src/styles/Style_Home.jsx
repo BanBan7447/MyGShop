@@ -70,7 +70,7 @@ const Style_Home = StyleSheet.create({
     },
 
     card_product: {
-        width: '44%',
+        width: '45%',
         marginHorizontal: 10,
         marginBottom: 20
     },

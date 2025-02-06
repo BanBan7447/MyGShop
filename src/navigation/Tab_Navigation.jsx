@@ -19,7 +19,11 @@ const Tab_Navigation = () => {
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: colors.Light_Blue
+          backgroundColor: colors.White,
+          height: 56,
+          backgroundColor: colors.White,
+          height: 56,
+          paddingTop: 6,
         },
 
         tabBarIcon: ({ focused }) => {
