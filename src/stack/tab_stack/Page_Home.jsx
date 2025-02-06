@@ -18,8 +18,6 @@ const Page_Home = (props) => {
   const [products, setProducts] = useState([]);
   const [selectCategory, setSelectCategory] = useState(null);
 
-  const [loading, setLoading] = useState(true);
-
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("highlight");
   const [items, setItems] = useState([
@@ -126,7 +124,7 @@ const Page_Home = (props) => {
 
   // Hàm render Products
   const renderProduct = ({ item }) => {
-    const { image, name, price, categoryID } = item;
+    const { _id, image, name, price, categoryID, state } = item;
     const ImageProduct = image[1]
 
     // Tìm danh mục tương ứng với sản phẩm
@@ -136,19 +134,33 @@ const Page_Home = (props) => {
     // Định dạng giá tiền
     const formatPrice = price.toLocaleString('vi-VN');
 
+    // Kiểm tra nếu sản phẩm hết hàng
+    const isOutStock = state === 'Hết hàng';
+
     return (
-      <TouchableOpacity style={Style_Home.card_product}>
-        {
-          loading && <ActivityIndicator size="small" color="#0000ff" />
-        }
+      <TouchableOpacity
+        style={Style_Home.card_product}
+        onPress={() => {
+          navigation.navigate('Detail', { productId: _id });
+        }}>
+        
+        <View style={{position: 'relative'}}>
         <FastImage
           style={Style_Home.img_product}
           source={{
             uri: ImageProduct,
             priority: FastImage.priority.high,
           }}
-          onLoadEnd={() => setLoading(false)}
         />
+
+        {
+          isOutStock && (
+            <View style={Style_Home.label_outStock}>
+              <Text style={Style_Home.text_outStock}>Đã hết hàng</Text>
+            </View>
+          )
+        }
+        </View>
 
         <Text
           style={Style_Home.name_product}
@@ -225,7 +237,7 @@ const Page_Home = (props) => {
             justifyContent: 'center',
             alignItems: 'center'
           }}
-          
+
           style={{
             borderWidth: 0,
           }}

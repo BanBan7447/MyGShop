@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, ActivityIndicator, TextInput, FlatList } from 'react-native'
+import { View, Text, TouchableOpacity, Image, ActivityIndicator, TextInput, FlatList, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 
 import Style_Home from '../../styles/Style_Home'
@@ -23,7 +23,7 @@ const Page_Search = () => {
         try {
             const response = await getAllProdcts();
             setProducts(response);
-            setFilterProducts([]); // Ban đầu danh sách tìm kiếm trống
+            setFilterProducts(response); // Ban đầu danh sách tìm kiếm trống
         } catch (e) {
             console.log(e);
         }
@@ -50,7 +50,7 @@ const Page_Search = () => {
         setSearchText(text); // Cập nhật từ khóa tìm kiếm
 
         if (text === '') {
-            setFilterProducts([]); // Nếu không có từ khóa thì giữ danh sách trống
+            setFilterProducts(funGetAllProducts); // Nếu không có từ khóa thì giữ danh sách trống
         } else {
             const filter = products.filter(product =>
                 product.name.toLowerCase().includes(text.toLowerCase()) // // Lọc sản phẩm có tên chứa từ khóa
@@ -105,7 +105,9 @@ const Page_Search = () => {
     };
 
     return (
-        <View style={Style_Search.container}>
+        <ScrollView
+            style={Style_Search.container}
+            showsVerticalScrollIndicator={false}>
             <TouchableOpacity style={Style_Search.navigation}>
                 <Image
                     source={require('../../assets/icon/icon_long_arrow.png')}
@@ -138,7 +140,7 @@ const Page_Search = () => {
                 showsVerticalScrollIndicator={false}
                 scrollEnabled={false}
                 style={Style_Home.container_product} />
-        </View>
+        </ScrollView>
     )
 }
 

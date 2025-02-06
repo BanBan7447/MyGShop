@@ -26,7 +26,7 @@ const Style_Search = StyleSheet.create({
     text_navigation: {
         fontFamily: 'Inter Medium',
         color: colors.Black,
-        fontSize: 16
+        fontSize: 20
     },
 
     contain_text_input: {

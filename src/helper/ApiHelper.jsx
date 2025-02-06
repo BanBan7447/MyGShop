@@ -104,9 +104,24 @@ const getProductsByCategory = async (categoryID) => {
     return [];
 }
 
+// Gọi API lấy thông tin chi tiết của 1 sản phẩm
+const getDetailProduct = async (productId) => {
+    try {
+        console.log('>>>>>>>>>>>>>>>>>> get Detail Product');
+        const response = await AxiosInstance().get(`/product/getProduct?productId=${productId}`);
+
+        if(response.status == true){
+            return response.data;
+        }
+    }catch(e){
+        console.log(e);
+    }
+}
+
 export {
     login,
     signUp,
     getCategories,
     getAllProdcts,
+    getDetailProduct,
     getProductsByCategory }

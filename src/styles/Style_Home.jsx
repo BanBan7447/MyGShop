@@ -70,7 +70,7 @@ const Style_Home = StyleSheet.create({
     },
 
     card_product: {
-        width: '45%',
+        width: '44%',
         marginHorizontal: 10,
         marginBottom: 20
     },
@@ -100,6 +100,22 @@ const Style_Home = StyleSheet.create({
         fontFamily: 'Inter Bold',
         fontSize: 24,
         color: colors.Red,
+    },
+
+    label_outStock: {
+        position: 'absolute',
+        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        borderRadius: 8,
+        bottom: 16,
+        right: 8
+    },
+
+    text_outStock: {
+        fontFamily: 'Inter Bold',
+        color: colors.White,
+        fontSize: 12
     }
 })
 
