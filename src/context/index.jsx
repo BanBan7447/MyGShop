@@ -2,29 +2,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState, createContext, useEffect } from 'react'
 
 // Kho dữ liệu chung cho cả ứng dụng
-// const AppContext = createContext();
-
-// const index = (props) => {
-//     const { children } = props;
-//     const [users, setUsers] = useState(null);
-
-//     return (
-//         <AppContext.Provider value={{ users, setUsers }}>
-//             {children}
-//         </AppContext.Provider>
-//     )
-
-// }
-
-// export { AppContext, index };
-
 const AppContext = createContext();
-
 const AppProvider = (props) => {
     const { children } = props;
     const [users, setUsers] = useState(null);
-    const [cart, setCart] = useState(null);
-
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -44,7 +25,7 @@ const AppProvider = (props) => {
     }, []);
 
     return (
-        <AppContext.Provider value={{ users, setUsers, cart, setCart }}>
+        <AppContext.Provider value={{ users, setUsers }}>
             {loading ? null : children}
         </AppContext.Provider>
     );

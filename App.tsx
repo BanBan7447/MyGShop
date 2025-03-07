@@ -1,30 +1,42 @@
 import { View, Text, StyleSheet } from 'react-native'
-import React, { useEffect, useState, useContext } from 'react'
+import React from 'react'
 
-import Page_Splash from './src/stack/page_stack/Page_Splash'
-import Page_Login from './src/stack/page_stack/Page_Login'
-import Page_SignUp from './src/stack/page_stack/Page_SignUp'
-import { NavigationContainer } from '@react-navigation/native'
 import Stack_Navigation from './src/navigation/Stack_Navigation'
-import { AppProvider } from './src/context/index'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import { NavigationContainer } from '@react-navigation/native'
+import { AppProvider } from './src/context'
+import { CartProvider } from './src/context/CartContext'
 
 const App = () => {
   return (
     <AppProvider>
-      <NavigationContainer>
-        <View style={style.container}>
-          <Stack_Navigation />
-        </View>
-      </NavigationContainer>
+      <CartProvider>
+        <NavigationContainer>
+          <View style={style_app.container}>
+            <Stack_Navigation />
+          </View>
+        </NavigationContainer>
+      </CartProvider>
     </AppProvider>
+
+    // <ContextCart>
+    //   <NavigationContainer>
+    //     <View style={style.container}>
+    //       <Stack.Navigator initialRouteName='Product'>
+    //         <Stack.Screen name='Product' component={Page_Product}
+    //           options={{ headerShown: false }} />
+    //         <Stack.Screen name='Cart' component={Page_Cart}
+    //           options={{ headerShown: false }} />
+    //       </Stack.Navigator>
+    //     </View>
+    //   </NavigationContainer>
+    // </ContextCart>
   )
 }
 
-const style = StyleSheet.create({
+export default App
+
+const style_app = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   }
 })
-
-export default App

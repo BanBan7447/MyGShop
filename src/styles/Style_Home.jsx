@@ -75,6 +75,16 @@ const Style_Home = StyleSheet.create({
         marginBottom: 20
     },
 
+    loading_img_product: {
+        width: '100%',
+        height: 160,
+        borderRadius: 16,
+        overflow: 'hidden',
+        marginBottom: 8,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
     img_product: {
         width: '100%',
         height: 160,
@@ -116,6 +126,45 @@ const Style_Home = StyleSheet.create({
         fontFamily: 'Inter Bold',
         color: colors.White,
         fontSize: 12
+    },
+
+    container_loading: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(255, 255, 255, 0.8)'
+    },
+
+    img_skeleton: {
+        width: '100%',
+        height: 160,
+        borderRadius: 16,
+        overflow: 'hidden',
+        marginBottom: 8,
+        backgroundColor: colors.Grey
+    },
+
+    name_skeleton: {
+        width: '80%',
+        height: 12,
+        borderRadius: 100,
+        marginBottom: 4,
+        backgroundColor: colors.Black
+    },
+
+    type_product_skeleton: {
+        width: '50%',
+        height: 12,
+        borderRadius: 100,
+        marginBottom: 4,
+        backgroundColor: colors.Grey
+    },
+
+    price_product_skeleton: {
+        width: '80%',
+        height: 12,
+        borderRadius: 100,
+        backgroundColor: colors.Black
     }
 })
 
